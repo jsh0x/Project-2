@@ -1,4 +1,4 @@
-__author__ = 'Josh'
+__author__ = 'jsh0x'
 import requests
 import json
 
@@ -79,14 +79,4 @@ if matchSuccess == 1:
     print Year + ' ' + Make + ' ' + Model
 
 
-"""
-
-Style = raw_input("Car Style?")
-
-
-#payload = {'fmt': 'json', 'apiKey': 'rpftuam8pj4dawg5nauq8vs5'}
-#r = requests.get('https://api.edmunds.com/api/vehicle/v2/makes?', params=payload)
-r = requests.get('https://api.edmunds.com/api/vehicle/v2/makes?fmt=json&api_key=rpftuam8pj4dawg5nauq8vs5')
-json_object = json.loads(r.text)
-
-"""
+#Style = raw_input("Car Style?")
