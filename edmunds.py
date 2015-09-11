@@ -17,5 +17,5 @@ class Edmunds:
         for make in json_object['makes']:
             retval[make['name']] = make['id']
 
-        return make
+        return retval
 
