@@ -53,6 +53,8 @@ class Edmunds:
         payload = {'fmt': 'json', 'api_key': self.api_key}
         r = requests.get('https://api.edmunds.com/api/vehicle/v2/makes', params=payload)
         json_object = json.loads(r.text)
+
+        #Returns too many values, needs input to narrow down results.
 """
         for make in json_object['makes']:
             for model in json_object['makes'][makeCount]['models']:
