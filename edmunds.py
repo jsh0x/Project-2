@@ -23,22 +23,19 @@ class Edmunds:
 
     def get_models(self):
         retval = {}
-        makeCount = 0
         modelCount = 0
         modelList = []
 
         payload = {'fmt': 'json', 'api_key': self.api_key}
-        r = requests.get('https://api.edmunds.com/api/vehicle/v2/makes', params=payload)
+        r = requests.get('https://api.edmunds.com/api/vehicle/v2/{makes}/models', params=payload)
         json_object = json.loads(r.text)
 
-        for make in json_object['makes']:
-            for model in json_object['makes'][makeCount]['models']:
-                modelList.append(json_object['makes'][makeCount]['models'][modelCount]['name'])
-                modelCount += 1
-            retval[make['name']] = modelList
-            makeCount += 1
-            modelCount = 0
-            modelList = []
+        for model in json_object['models']:
+            modelList.append(json_object['models'][modelCount]['name'])
+            modelCount += 1
+        retval = modelList
+        modelCount = 0
+        modelList = []
 
         return retval
 
