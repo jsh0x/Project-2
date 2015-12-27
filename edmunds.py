@@ -15,44 +15,38 @@ class Edmunds:
         json_object = json.loads(r.text)
 
         for make in json_object['makes']:
-            retval[make['name']] = make['id']
+            retval[make['name']] = make['niceName']
 
         return retval
 
 
 
-    def get_models(self):
+    def get_models(self, make):
         retval = {}
-        modelCount = 0
-        modelList = []
 
         payload = {'fmt': 'json', 'api_key': self.api_key}
-        r = requests.get('https://api.edmunds.com/api/vehicle/v2/{makes}/models', params=payload)
+        r = requests.get('https://api.edmunds.com/api/vehicle/v2/'+make+'/models', params=payload)
         json_object = json.loads(r.text)
 
         for model in json_object['models']:
-            modelList.append(json_object['models'][modelCount]['name'])
-            modelCount += 1
-        retval = modelList
-        modelCount = 0
-        modelList = []
+            retval[model['name']] = model['id']
 
         return retval
 
-    def get_years(self):
+    def get_years(self, make, model):
         retval = {}
-        makeCount = 0
-        modelCount = 0
-        yearCount = 0
-        modelList = []
-        yearList = []
 
         payload = {'fmt': 'json', 'api_key': self.api_key}
-        r = requests.get('https://api.edmunds.com/api/vehicle/v2/makes', params=payload)
+        r = requests.get('https://api.edmunds.com/api/vehicle/v2/'+make+'/'+model+'/years', params=payload)
         json_object = json.loads(r.text)
 
+        for year in json_object['years']:
+            retval[year['year']] = year['id']
+
+        return retval
+
         #Returns too many values, needs input to narrow down results.
-"""
+    """
         for make in json_object['makes']:
             for model in json_object['makes'][makeCount]['models']:
                 for year in json_object['makes'][makeCount]['models'][modelCount]['years']:
@@ -68,4 +62,16 @@ class Edmunds:
             modelCount = 0
 
         return retval
-"""
+    """
+
+    def get_styles(self, make, model, year):
+        retval = {}
+
+        payload = {'fmt': 'json', 'api_key': self.api_key}
+        r = requests.get('https://api.edmunds.com/api/vehicle/v2/'+make+'/'+model+'/'+year+'/styles', params=payload)
+        json_object = json.loads(r.text)
+
+        for style in json_object['styles']:
+            retval[style['name']] = style['id']
+
+        return retval
