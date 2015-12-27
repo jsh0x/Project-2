@@ -1,0 +1,86 @@
+<title>Test Case Manager</title>
+<form name="myform" id ="myform" method="post">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/test_case_manager.css') }}" />
+<header>
+<h1>Edmonds Viewer</h1>
+</header>
+<nav>
+    <table>
+        <tbody align="left">
+        <tr><th>Makes</th></tr>
+        <tr><td>
+        </td></tr>
+        <tr><th>Models</th></tr>
+        <tr><td>
+        </td></tr>
+        <tr><th>Years</th></tr>
+        <tr><td>
+        </td></tr>
+        <tr><th></th></tr>
+        <tr><th></th></tr>
+        <tr><td>
+            <select id="sel_id" name="sel_testcase_id"  onchange="submitform();">
+            </select>
+        </td></tr>
+        </tbody>
+    </table>
+</nav>
+<section>
+    <h1>Edmonds Example</h1>
+    <p></p>
+
+    <code>
+        <table class="testcases">
+            <tbody align="left">
+            <tr><th>Makes</th><th>Models</th><th>Years</th><th>---</th><th>---</th><th>---</th><th>---</th></tr>
+            <tr><th>
+            <select id="make_id" name="selected_make"  onchange="submitform();">
+            {% for make in payload.makes %}
+                {% if payload.selected.make == make %}
+                <option selected="selected" value="{{ make }}">{{ make }}</option>
+                {% else %}
+                <option value="{{ make }}">{{ make }}</option>
+                {% endif %}
+            {% endfor %}
+            </select>
+            </th>
+            <th>
+            <select id="model_id" name="selected_model"  onchange="submitform();">
+            {% for model in payload.models %}
+                {% if payload.selected.model == model %}
+                <option selected="selected" value="{{ model }}">{{ model }}</option>
+                {% else %}
+                <option value="{{ model }}">{{ model }}</option>
+                {% endif %}
+            {% endfor %}
+            </th>
+            <th>
+            <select id="year_id" name="selected_year"  onchange="submitform();">
+            {% for year in payload.years %}
+                {% if payload.selected.year == year %}
+                <option selected="selected" value="{{ year }}">{{ year }}</option>
+                {% else %}
+                <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+            </th><th>Status</th><th>Validation</th><th>Title</th><th>Modified</th></tr>
+            </tbody>
+        </table>
+
+    </code>
+</section>
+<footer>
+dennis
+</footer>
+
+
+</form>
+
+
+
+<script type="text/javascript">
+function submitform()
+{
+  document.myform.submit();
+}
+</script>
