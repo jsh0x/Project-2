@@ -17,7 +17,7 @@
         <tr><td>
         </td></tr>
         <tr><th></th></tr>
-        <tr><th></th></tr>
+        <tr><th>Styles</th></tr>
         <tr><td>
             <select id="sel_id" name="sel_testcase_id"  onchange="submitform();">
             </select>
@@ -32,7 +32,7 @@
     <code>
         <table class="testcases">
             <tbody align="left">
-            <tr><th>Makes</th><th>Models</th><th>Years</th><th>---</th><th>---</th><th>---</th><th>---</th></tr>
+            <tr><th>Makes</th><th>Models</th><th>Years</th><th>Styles</th><th>---</th><th>---</th><th>---</th><th>---</th></tr>
             <tr><th>
             <select id="make_id" name="selected_make"  onchange="submitform();">
             {% for make in payload.makes %}
@@ -61,6 +61,16 @@
                 <option selected="selected" value="{{ year }}">{{ year }}</option>
                 {% else %}
                 <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+            </th>
+            <th>
+            <select id="style_id" name="selected_style"  onchange="submitform();">
+            {% for style in payload.styles %}
+                {% if payload.selected.style == style %}
+                <option selected="selected" value="{{ style }}">{{ style }}</option>
+                {% else %}
+                <option value="{{ style }}">{{ style }}</option>
                 {% endif %}
             {% endfor %}
             </th><th>Status</th><th>Validation</th><th>Title</th><th>Modified</th></tr>

@@ -12,8 +12,8 @@ edmunds_api = edmunds.Edmunds(api_key)
 
 @app.route('/', methods=['POST', 'GET'])
 def endmonds():
-    page_payload = {'models':'', 'makes':'', 'years':''}
-    selected = {'make':'', 'model':'', 'year':''}
+    page_payload = {'models':'', 'makes':'', 'years':'', 'styles':''}
+    selected = {'make':'', 'model':'', 'year':'', 'styles':''}
 
     if request.method == 'POST':
         form = request.form
@@ -29,6 +29,10 @@ def endmonds():
 
                 if 'selected_year' in form:
                     selected['year'] = request.form['selected_year']
+                    page_payload['styles'] = edmunds_api.get_styles(selected['make'], selected['model'], selected['year'])
+
+                    if 'selected_style' in form:
+                        selected['style'] = request.form['selected_style']
 
 
     page_payload['selected'] = selected
